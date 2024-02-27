@@ -15,7 +15,7 @@ class MovieMapper {
       popularity: movieDB.popularity,
       posterPath: (movieDB.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500/${movieDB.backdropPath}'
-          : 'https://static.displate.com/280x392/displate/2023-11-02/a05941483c37409483df836b5e97ba45_f74911a8c40bb13b3c9d1e1247f388fd.jpg',
+          : 'no-poster',
       releaseDate: movieDB.releaseDate,
       title: movieDB.title,
       video: movieDB.video,
