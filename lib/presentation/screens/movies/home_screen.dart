@@ -33,14 +33,20 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     //* Se pone el .notifier porque no queremos el estado, queremos el notifier
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
     ref.read(popularMoviesProvider.notifier).loadNextPage();
+    ref.read(upConmingMoviesProvider.notifier).loadNextPage();
+    ref.read(topRatedMoviesProvider.notifier).loadNextPage();
   }
 
   @override
   Widget build(BuildContext context) {
+    final initialLoading = ref.watch(initialLoadingProvider);
+    if (initialLoading) return const FullScreenLoader();
     //* se pone watch porque si necesitamos estar pendientes del estado que nos proporciona nowPlayingMoviesProvider
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(movidesSlideshowProvider);
     final popularMovies = ref.watch(popularMoviesProvider);
+    final upComingMovies = ref.watch(upConmingMoviesProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesProvider);
     //* SingleChildScrollView o CustomScrollView poder hacer scroll y no salga error que se desvordo de la pantalla
     return CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -71,12 +77,20 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                       .loadNextPage(),
                 ),
                 MovieHorizontalListview(
-                  movies: nowPlayingMovies,
+                  movies: upComingMovies,
                   label: 'Próximamente',
                   subLabel: 'En este mes',
-                  loadNextPage: () => ref
-                      .read(nowPlayingMoviesProvider.notifier)
-                      .loadNextPage(),
+                  loadNextPage: () =>
+                      ref.read(upConmingMoviesProvider.notifier).loadNextPage(),
+                ),
+                MovieHorizontalListview(
+                  movies: topRatedMovies,
+                  label: 'Lo mas Valorado',
+                  loadNextPage: () =>
+                      ref.read(topRatedMoviesProvider.notifier).loadNextPage(),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 MovieHorizontalListview(
                   movies: popularMovies,

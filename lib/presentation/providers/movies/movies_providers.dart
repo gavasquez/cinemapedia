@@ -16,6 +16,22 @@ final popularMoviesProvider =
   return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
+//
+
+//* upConmingMoviesProvider
+final upConmingMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+  final fetchMoreMovies = ref.watch(movieRepositryProvider).getUpcoming;
+  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+});
+
+//* topRatedMoviesProvider
+final topRatedMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+  final fetchMoreMovies = ref.watch(movieRepositryProvider).getTopRated;
+  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+});
+
 typedef MovieCallback = Future<List<Movie>> Function({int page});
 
 // Mantener el estado de las peliculas
