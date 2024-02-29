@@ -9,4 +9,7 @@ abstract class MoviesDataSource {
 
   // Solo una pelicula
   Future<Movie> getMovieById(String id);
+
+  // Datasource de busqueda de peliculas
+  Future<List<Movie>> searchMovies(String query);
 }

@@ -16,8 +16,9 @@ class MovieMapper {
       popularity: movieDB.popularity,
       posterPath: (movieDB.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500${movieDB.posterPath}'
-          : 'no-poster',
-      releaseDate: movieDB.releaseDate,
+          : 'https://www.movienewz.com/wp-content/uploads/2014/07/poster-holder.jpg',
+      releaseDate:
+          movieDB.releaseDate != null ? movieDB.releaseDate! : DateTime.now(),
       title: movieDB.title,
       video: movieDB.video,
       voteAverage: movieDB.voteAverage,

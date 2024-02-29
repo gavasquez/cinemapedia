@@ -7,4 +7,7 @@ abstract class MoviesRepository {
   Future<List<Movie>> getTopRated({int page = 1});
   // Solo una pelicula
   Future<Movie> getMovieById(String id);
+
+  // Repositorio de busqueda de peliculas
+  Future<List<Movie>> searchMovies(String query);
 }

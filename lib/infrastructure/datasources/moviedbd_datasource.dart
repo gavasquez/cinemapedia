@@ -11,7 +11,7 @@ class MoviedbDatasouce extends MoviesDataSource {
       baseUrl: 'https://api.themoviedb.org/3',
       queryParameters: {
         'api_key': Environment.theMovieDbKey,
-        'language': 'es-MX'
+        'language': 'es-COL'
       }));
 
   List<Movie> _jsonToMovie(Map<String, dynamic> json) {
@@ -64,5 +64,14 @@ class MoviedbDatasouce extends MoviesDataSource {
     final movieDetails = MovieDetails.fromJson(response.data);
     final movie = MovieMapper.movieDetailsEntity(movieDetails);
     return movie;
+  }
+
+  @override
+  Future<List<Movie>> searchMovies(String query) async {
+    if (query.isEmpty) return [];
+
+    final response =
+        await dio.get('/search/movie', queryParameters: {'query': query});
+    return _jsonToMovie(response.data);
   }
 }
