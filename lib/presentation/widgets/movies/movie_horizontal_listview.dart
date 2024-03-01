@@ -119,7 +119,7 @@ class _Slide extends StatelessWidget {
                   //* GestureDetector detectar un gesto  de tap en la imagen
                   return GestureDetector(
                     //* push para que pueda volver a la pantalla anterior
-                    onTap: () => context.push('/movie/${movie.id}'),
+                    onTap: () => context.push('/home/0/movie/${movie.id}'),
                     child: FadeIn(child: child),
                   );
                 },
