@@ -1,6 +1,7 @@
 import 'package:cinemapedia/config/domain/entities/movie.dart';
 import 'package:cinemapedia/presentation/delegates/search_movie_delegate.dart';
 import 'package:cinemapedia/presentation/providers/providers.dart';
+import 'package:cinemapedia/presentation/providers/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +13,7 @@ class CustomAppbar extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final colors = Theme.of(context).colorScheme;
     final titleStyle = Theme.of(context).textTheme.titleMedium;
+    final isDarkMode = ref.watch(themeNotifierProvider).isDark;
 
     return SafeArea(
       bottom: false,
@@ -34,6 +36,15 @@ class CustomAppbar extends ConsumerWidget {
                 ),
                 //* Spacer = sirve para tomar todo el espacio posible y va a correr los widgets
                 const Spacer(),
+                //* Boton del tema
+                IconButton(
+                    onPressed: () {
+                      ref.read(themeNotifierProvider.notifier).toggleDarkMode();
+                    },
+                    icon: isDarkMode
+                        ? const Icon(Icons.light_mode_outlined)
+                        : const Icon(Icons.dark_mode_outlined)),
+                //* Boton de la busqueda
                 IconButton(
                     onPressed: () {
                       //* Tomamos la busqueda
